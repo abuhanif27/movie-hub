@@ -1,9 +1,12 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
+// import useGenres from "../hooks/useGenres";
 
 function MovieGrid() {
   const { errorMessage, movies } = useMovies();
+  // const { genres, genreErrorMessage } = useGenres();
+
   return (
     <>
       {errorMessage && <Text>{errorMessage}</Text>}
