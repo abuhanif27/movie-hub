@@ -1,7 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError, CanceledError } from "axios";
 
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiM2Q0Mzg0MTc4YWJjOThhYTdmZWVjNjFlM2FjODAxYyIsIm5iZiI6MTc0Mzc3MzE4MS42ODQsInN1YiI6IjY3ZWZkZGZkYTkzMTNjNzE4NGFkMTY1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i-U1xkhpmRe7z94bBekDjeyzs0wlNKjB7fSsWXsquzk";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 export default axios.create({
   baseURL: "https://api.themoviedb.org/3",
@@ -10,3 +9,5 @@ export default axios.create({
     "Content-Type": "application/json;charset=utf-8",
   },
 });
+
+export { AxiosError, CanceledError };
