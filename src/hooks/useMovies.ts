@@ -7,6 +7,8 @@ export interface Movie {
   poster_path: string;
   // genre_ids: number[];
   release_date: string;
+  vote_count: number;
+  vote_average: number;
 }
 
 interface FetchMoviesResponse {
