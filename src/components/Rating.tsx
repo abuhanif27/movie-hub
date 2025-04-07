@@ -1,6 +1,6 @@
 import { FaStar, FaStarHalf, FaStarHalfAlt } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
-import { Box, Icon, Text } from "@chakra-ui/react";
+import { Icon, Text } from "@chakra-ui/react";
 
 interface Props {
   rating: number;
@@ -16,7 +16,6 @@ const getStarIcon = (rating: number) =>
     : CiStar;
 
 function Rating({ rating }: Props) {
-  console.log(rating);
   return (
     <Text fontSize="lg" display="flex" alignItems="center" gap={2}>
       {rating && rating.toFixed(1)}
