@@ -19,7 +19,7 @@ function MovieCard({ movie }: Props) {
   //   .filter(Boolean)
   //   .join(", ");
   return (
-    <Card borderRadius={10} overflow="hidden">
+    <Card width="300px" borderRadius={10} overflow="hidden">
       <Image src={imageUrl(movie.poster_path)} />
       <CardBody>
         <Heading fontSize="2xl">
