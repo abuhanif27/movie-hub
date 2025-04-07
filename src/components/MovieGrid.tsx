@@ -3,11 +3,9 @@ import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
-// import useGenres from "../hooks/useGenres";
 
 function MovieGrid() {
   const { errorMessage, movies, isLoading } = useMovies();
-  // const { genres, genreErrorMessage } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
@@ -20,13 +18,13 @@ function MovieGrid() {
       >
         {isLoading &&
           skeletons.map((skeleton) => (
-            <MovieCardContainer>
-              <MovieCardSkeleton key={skeleton} />
+            <MovieCardContainer key={skeleton}>
+              <MovieCardSkeleton />
             </MovieCardContainer>
           ))}
         {movies.map((movie) => (
-          <MovieCardContainer>
-            <MovieCard key={movie.id} movie={movie} />
+          <MovieCardContainer key={movie.id}>
+            <MovieCard movie={movie} />
           </MovieCardContainer>
         ))}
       </SimpleGrid>

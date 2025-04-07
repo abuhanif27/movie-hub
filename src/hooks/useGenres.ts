@@ -6,24 +6,37 @@ export interface Genre {
   name: string;
 }
 
+interface FetchGenresResponse {
+  genres: Genre[];
+}
+
 const useGenres = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
-  const [genreErrorMessage, setGenreErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
+
+    setLoading(true);
     apiClient
-      .get("/genre/movie/list", { signal: controller.signal })
-      .then((res) => setGenres(res.data.genres))
+      .get<FetchGenresResponse>("/genre/movie/list", {
+        signal: controller.signal,
+      })
+      .then((res) => {
+        setGenres(res.data.genres);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
-        setGenreErrorMessage(err.message);
+        setErrorMessage(err.message);
+        setLoading(false);
       });
 
     return () => controller.abort();
   }, []);
 
-  return { genres, genreErrorMessage };
+  return { genres, errorMessage, isLoading };
 };
 
 export default useGenres;

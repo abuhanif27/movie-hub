@@ -1,23 +1,15 @@
-// import { Genre } from "../hooks/useGenres";
 import { Movie } from "../hooks/useMovies";
 import { Box, Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
-import { getDate } from "../hooks/useMovies";
 import VoteCount from "./VoteCount";
 import Rating from "./Rating";
-
-const imageUrl = (image_path: string) =>
-  `https://image.tmdb.org/t/p/w500${image_path}`;
+import getDate from "../services/getDate";
+import imageUrl from "../services/imageUrl";
 
 interface Props {
   movie: Movie;
-  // genres: Genre[];
 }
 
 function MovieCard({ movie }: Props) {
-  // const genreNames = movie.genre_ids
-  //   .map((id) => genres.find((g) => g.id === id)?.name)
-  //   .filter(Boolean)
-  //   .join(", ");
   return (
     <Card>
       <Image src={imageUrl(movie.poster_path)} />
