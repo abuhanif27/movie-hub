@@ -6,8 +6,7 @@ import MovieCardContainer from "./MovieCardContainer";
 
 function MovieGrid() {
   const { data, errorMessage, isLoading } = useMovies();
-  // const { errorMessage, movies, isLoading } = useMovies();
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>
@@ -17,17 +16,17 @@ function MovieGrid() {
         spacing={3}
         padding="10px"
       >
-        {isLoading &&
-          skeletons.map((skeleton) => (
-            <MovieCardContainer key={skeleton}>
-              <MovieCardSkeleton />
-            </MovieCardContainer>
-          ))}
-        {data.map((d) => (
-          <MovieCardContainer key={d.id}>
-            <MovieCard movie={d} />
-          </MovieCardContainer>
-        ))}
+        {isLoading
+          ? skeletons.map((skeleton) => (
+              <MovieCardContainer key={skeleton}>
+                <MovieCardSkeleton />
+              </MovieCardContainer>
+            ))
+          : data.map((d) => (
+              <MovieCardContainer key={d.id}>
+                <MovieCard movie={d} />
+              </MovieCardContainer>
+            ))}
       </SimpleGrid>
     </>
   );

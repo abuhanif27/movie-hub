@@ -12,12 +12,16 @@ interface Props {
 function MovieCard({ movie }: Props) {
   return (
     <Card>
-      <Image src={imageUrl(movie.poster_path)} />
+      <Image
+        src={imageUrl(movie.poster_path)}
+        maxHeight={300}
+        objectFit="cover"
+      />
       <CardBody>
         <Heading fontSize="2xl">
           {movie.title.length <= 15
             ? movie.title
-            : movie.title.substring(0, 15) + "..."}
+            : movie.title.substring(0, 12) + "..."}
         </Heading>
         <Box display="flex" justifyContent="space-between" mt={5} paddingX={1}>
           <VoteCount vote={movie.vote_count} />
