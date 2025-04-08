@@ -1,3 +1,4 @@
+import { List, ListItem, Text } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 
 const GenreList = () => {
@@ -7,11 +8,13 @@ const GenreList = () => {
   if (errorMessage) return <p>Error: {errorMessage}</p>;
 
   return (
-    <ul>
+    <List>
       {data.map((d) => (
-        <li key={d.id}>{d.name}</li>
+        <ListItem key={d.id} paddingY="5px">
+          <Text fontSize="lg">{d.name}</Text>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
 
