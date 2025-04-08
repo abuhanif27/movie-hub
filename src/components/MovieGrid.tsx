@@ -3,15 +3,14 @@ import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
-import { Genre } from "../hooks/useGenres";
+import { MovieQuery } from "../App";
 
 interface Props {
-  selectedGenre: Genre | null;
-  sortBy: string;
+  movieQuery: MovieQuery;
 }
 
-function MovieGrid({ selectedGenre, sortBy }: Props) {
-  const { data, errorMessage, isLoading } = useMovies(selectedGenre, sortBy);
+function MovieGrid({ movieQuery }: Props) {
+  const { data, errorMessage, isLoading } = useMovies(movieQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

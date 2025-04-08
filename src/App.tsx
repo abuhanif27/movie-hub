@@ -6,9 +6,13 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import SortBySelector from "./components/SortBySelector";
 
+export interface MovieQuery {
+  genre: Genre | null;
+  sortBy: string;
+}
+
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const [sortBy, setSortBy] = useState("");
+  const [movieQuery, setMovieQuery] = useState<MovieQuery>({} as MovieQuery);
   return (
     <Grid
       templateAreas={{
@@ -26,14 +30,16 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
-            onSelectGenre={(genre) => setSelectedGenre(genre)}
-            selectedGenre={selectedGenre}
+            onSelectGenre={(genre) => setMovieQuery({ ...movieQuery, genre })}
+            selectedGenre={movieQuery.genre}
           />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <SortBySelector onSortBy={setSortBy} />
-        <MovieGrid selectedGenre={selectedGenre} sortBy={sortBy} />
+        <SortBySelector
+          onSortBy={(sortBy) => setMovieQuery({ ...movieQuery, sortBy })}
+        />
+        <MovieGrid movieQuery={movieQuery} />
       </GridItem>
     </Grid>
   );
