@@ -7,10 +7,11 @@ import { Genre } from "../hooks/useGenres";
 
 interface Props {
   selectedGenre: Genre | null;
+  sortBy: string;
 }
 
-function MovieGrid({ selectedGenre }: Props) {
-  const { data, errorMessage, isLoading } = useMovies(selectedGenre);
+function MovieGrid({ selectedGenre, sortBy }: Props) {
+  const { data, errorMessage, isLoading } = useMovies(selectedGenre, sortBy);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

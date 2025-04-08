@@ -4,9 +4,11 @@ import MovieGrid from "./components/MovieGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
+import SortBySelector from "./components/SortBySelector";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [sortBy, setSortBy] = useState("");
   return (
     <Grid
       templateAreas={{
@@ -30,7 +32,8 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <MovieGrid selectedGenre={selectedGenre} />
+        <SortBySelector onSortBy={setSortBy} />
+        <MovieGrid selectedGenre={selectedGenre} sortBy={sortBy} />
       </GridItem>
     </Grid>
   );

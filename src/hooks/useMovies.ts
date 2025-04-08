@@ -11,11 +11,16 @@ export interface Movie {
   vote_average: number;
 }
 
-const useMovies = (selectedGenre: Genre | null) =>
+const useMovies = (selectedGenre: Genre | null, sortBy: string) =>
   useData<Movie>(
     "/discover/movie",
     "results",
-    { params: { with_genres: selectedGenre?.id } },
-    [selectedGenre?.id]
+    {
+      params: {
+        with_genres: selectedGenre?.id,
+        sort_by: sortBy,
+      },
+    },
+    [selectedGenre?.id, sortBy]
   );
 export default useMovies;
