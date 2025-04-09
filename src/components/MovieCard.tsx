@@ -19,9 +19,9 @@ function MovieCard({ movie }: Props) {
       />
       <CardBody>
         <Heading fontSize="2xl">
-          {movie.title.length <= 15
+          {movie.title.length <= 10
             ? movie.title
-            : movie.title.substring(0, 12) + "..."}
+            : movie.title.substring(0, 8) + "..."}
         </Heading>
         <Box display="flex" justifyContent="space-between" mt={5} paddingX={1}>
           <VoteCount vote={movie.vote_count} />
