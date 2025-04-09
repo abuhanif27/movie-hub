@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import MovieGrid from "./components/MovieGrid";
 import GenreList from "./components/GenreList";
@@ -36,9 +36,12 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <SortBySelector
-          onSortBy={(sortBy) => setMovieQuery({ ...movieQuery, sortBy })}
-        />
+        <Box paddingLeft={2} marginBottom={5}>
+          <SortBySelector
+            sortOrderBy={movieQuery.sortBy}
+            onSortBy={(sort) => setMovieQuery({ ...movieQuery, sortBy: sort })}
+          />
+        </Box>
         <MovieGrid movieQuery={movieQuery} />
       </GridItem>
     </Grid>
