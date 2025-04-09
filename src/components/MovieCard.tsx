@@ -13,7 +13,7 @@ function MovieCard({ movie }: Props) {
   return (
     <Card>
       <Image
-        src={imageUrl(movie.poster_path)}
+        src={movie.poster_path ? imageUrl(movie.poster_path) : "no-movie.png"}
         maxHeight={300}
         objectFit="cover"
       />
@@ -28,11 +28,11 @@ function MovieCard({ movie }: Props) {
           <Rating rating={movie.vote_average} />
         </Box>
         <Text
-          fontSize="lg"
+          fontSize="md"
           color="gray.500"
           mt={5}
           textAlign={"center"}
-          letterSpacing={2}
+          letterSpacing={1}
         >
           {getDate(movie.release_date)}
         </Text>
