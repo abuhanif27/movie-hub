@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import MovieGrid from "./components/MovieGrid";
 import GenreList from "./components/GenreList";
@@ -9,10 +9,15 @@ import SortBySelector from "./components/SortBySelector";
 export interface MovieQuery {
   genre: Genre | null;
   sortBy: string;
+  searchText: string;
 }
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<MovieQuery>({} as MovieQuery);
+
+  // Beginner-friendly way to check if the user is searching
+  const isSearching = movieQuery.searchText && movieQuery.searchText.length > 0;
+
   return (
     <Grid
       templateAreas={{
@@ -21,27 +26,42 @@ function App() {
       }}
       templateColumns={{
         base: "1fr",
-        lg: "200px 1fr",
+        lg: isSearching ? "0 1fr" : "200px 1fr", // hide aside when searching
       }}
     >
+      {/* Navbar */}
       <GridItem area="nav">
-        <Navbar />
+        <Navbar
+          onSearch={(searchText) =>
+            setMovieQuery({ ...movieQuery, searchText })
+          }
+        />
       </GridItem>
-      <Show above="lg">
+
+      {/* Genre Sidebar (Only when not searching) */}
+      {!isSearching && (
         <GridItem area="aside" paddingX={5}>
           <GenreList
             onSelectGenre={(genre) => setMovieQuery({ ...movieQuery, genre })}
             selectedGenre={movieQuery.genre}
           />
         </GridItem>
-      </Show>
+      )}
+
+      {/* Main Movie Grid */}
       <GridItem area="main">
-        <Box paddingLeft={2} marginBottom={5}>
-          <SortBySelector
-            sortOrderBy={movieQuery.sortBy}
-            onSortBy={(sort) => setMovieQuery({ ...movieQuery, sortBy: sort })}
-          />
-        </Box>
+        {/* Sort Selector (Only when not searching) */}
+        {!isSearching && (
+          <Box paddingLeft={2} marginBottom={5}>
+            <SortBySelector
+              sortOrderBy={movieQuery.sortBy}
+              onSortBy={(sort) =>
+                setMovieQuery({ ...movieQuery, sortBy: sort })
+              }
+            />
+          </Box>
+        )}
+
         <MovieGrid movieQuery={movieQuery} />
       </GridItem>
     </Grid>

@@ -1,21 +1,44 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { SimpleGrid, Text, Center, Box, Icon } from "@chakra-ui/react";
+import { MovieQuery } from "../App";
 import useMovies from "../hooks/useMovies";
+import useSearch from "../hooks/useSearch";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
-import { MovieQuery } from "../App";
+import { MdMovieFilter } from "react-icons/md";
 
 interface Props {
   movieQuery: MovieQuery;
 }
 
 function MovieGrid({ movieQuery }: Props) {
-  const { data, errorMessage, isLoading } = useMovies(movieQuery);
+  // Use search or discover based on searchText
+  const { data, errorMessage, isLoading } = movieQuery.searchText
+    ? useSearch(movieQuery)
+    : useMovies(movieQuery);
+
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  // Show if no movies found
+  if (!isLoading && !errorMessage && data.length === 0) {
+    return (
+      <Center height="60vh">
+        <Box textAlign="center" color="gray.500">
+          <Icon as={MdMovieFilter} boxSize={12} mb={4} />
+          <Text fontSize="2xl" fontWeight="bold">
+            No movies found
+          </Text>
+          <Text fontSize="md">
+            Try searching for something else or clear your filters.
+          </Text>
+        </Box>
+      </Center>
+    );
+  }
 
   return (
     <>
-      {errorMessage && <Text>{errorMessage}</Text>}
+      {errorMessage && <Text color="red.500">{errorMessage}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
         spacing={3}
@@ -27,9 +50,9 @@ function MovieGrid({ movieQuery }: Props) {
                 <MovieCardSkeleton />
               </MovieCardContainer>
             ))
-          : data.map((d) => (
-              <MovieCardContainer key={d.id}>
-                <MovieCard movie={d} />
+          : data.map((movie) => (
+              <MovieCardContainer key={movie.id}>
+                <MovieCard movie={movie} />
               </MovieCardContainer>
             ))}
       </SimpleGrid>
