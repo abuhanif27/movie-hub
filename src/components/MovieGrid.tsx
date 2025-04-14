@@ -36,27 +36,26 @@ function MovieGrid({ movieQuery }: Props) {
     );
   }
 
+  if (errorMessage) return <Text color="red.500">{errorMessage}</Text>;
+
   return (
-    <>
-      {errorMessage && <Text color="red.500">{errorMessage}</Text>}
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        spacing={6}
-        padding="10px"
-      >
-        {isLoading
-          ? skeletons.map((skeleton) => (
-              <MovieCardContainer key={skeleton}>
-                <MovieCardSkeleton />
-              </MovieCardContainer>
-            ))
-          : data.map((movie) => (
-              <MovieCardContainer key={movie.id}>
-                <MovieCard movie={movie} />
-              </MovieCardContainer>
-            ))}
-      </SimpleGrid>
-    </>
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+      spacing={6}
+      padding="10px"
+    >
+      {isLoading
+        ? skeletons.map((skeleton) => (
+            <MovieCardContainer key={skeleton}>
+              <MovieCardSkeleton />
+            </MovieCardContainer>
+          ))
+        : data.map((movie) => (
+            <MovieCardContainer key={movie.id}>
+              <MovieCard movie={movie} />
+            </MovieCardContainer>
+          ))}
+    </SimpleGrid>
   );
 }
 
