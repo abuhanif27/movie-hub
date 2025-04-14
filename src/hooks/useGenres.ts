@@ -1,12 +1,13 @@
-import useData from "./useData";
-
+import genres from "../data/genres";
 export interface Genre {
   id: number;
   name: string;
 }
 
-const useGenres = () => {
-  return useData<Genre>("/genre/movie/list", "genres");
-};
+const useGenres = () => ({
+  data: genres,
+  errorMessage: null,
+  isLoading: false,
+});
 
 export default useGenres;
