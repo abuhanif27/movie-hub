@@ -6,6 +6,7 @@ import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
 import { MdMovieFilter } from "react-icons/md";
+import { ComponentType } from "react";
 
 interface Props {
   movieQuery: MovieQuery;
@@ -24,7 +25,7 @@ function MovieGrid({ movieQuery }: Props) {
     return (
       <Center height="60vh">
         <Box textAlign="center" color="gray.500">
-          <Icon as={MdMovieFilter} boxSize={12} mb={4} />
+          <Icon as={MdMovieFilter as ComponentType} boxSize={12} mb={4} />
           <Text fontSize="2xl" fontWeight="bold">
             No movies found
           </Text>

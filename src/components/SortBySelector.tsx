@@ -1,6 +1,14 @@
-import { Menu, MenuList, MenuButton, Button, MenuItem } from "@chakra-ui/react";
+import {
+  Menu,
+  MenuList,
+  MenuButton,
+  Button,
+  MenuItem,
+  Icon,
+} from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import { sortOrder } from "../services/getSortByLabel";
+import { ComponentType } from "react";
 
 interface Props {
   onSortBy: (value: string) => void;
@@ -16,7 +24,10 @@ function SortingBySelector2({ onSortBy, sortOrderBy }: Props) {
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon as={BsChevronDown as ComponentType} />}
+      >
         Order By: {getSortTitle() || "Relevance"}
       </MenuButton>
       <MenuList>
