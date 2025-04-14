@@ -18,12 +18,10 @@ function MovieCard({ movie }: Props) {
         objectFit="cover"
       />
       <CardBody>
-        <Heading fontSize="2xl">
-          {movie.title.length <= 10
-            ? movie.title
-            : movie.title.substring(0, 8) + "..."}
+        <Heading fontSize={21} height="57px">
+          {movie.title}
         </Heading>
-        <Box display="flex" justifyContent="space-between" mt={5} paddingX={1}>
+        <Box display="flex" justifyContent="space-between" mt={7} paddingX={1}>
           <VoteCount vote={movie.vote_count} />
           <Rating rating={movie.vote_average} />
         </Box>

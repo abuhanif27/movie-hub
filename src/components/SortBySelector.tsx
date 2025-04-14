@@ -1,5 +1,6 @@
 import { Menu, MenuList, MenuButton, Button, MenuItem } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+import { sortOrder } from "../services/getSortByLabel";
 
 interface Props {
   onSortBy: (value: string) => void;
@@ -12,15 +13,6 @@ function SortingBySelector2({ onSortBy, sortOrderBy }: Props) {
     if (order) return order.label;
     return null;
   };
-  const sortOrder = [
-    { label: "Most Popular", value: "popularity.desc" },
-    { label: "Newest Releases", value: "release_date.desc" },
-    { label: "Highest Revenue", value: "revenue.desc" },
-    { label: "Newest Primary Release", value: "primary_release_date.desc" },
-    { label: "Z-A Title", value: "original_title.desc" },
-    { label: "Top Rated", value: "vote_average.desc" },
-    { label: "Most Voted", value: "vote_count.desc" },
-  ];
 
   return (
     <Menu>

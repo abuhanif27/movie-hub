@@ -5,6 +5,7 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import SortBySelector from "./components/SortBySelector";
+import MovieHeading from "./components/MovieHeading";
 
 export interface MovieQuery {
   genre: Genre | null;
@@ -50,17 +51,19 @@ function App() {
 
       {/* Main Movie Grid */}
       <GridItem area="main">
-        {/* Sort Selector (Only when not searching) */}
-        {!isSearching && (
-          <Box paddingLeft={2} marginBottom={5}>
-            <SortBySelector
-              sortOrderBy={movieQuery.sortBy}
-              onSortBy={(sort) =>
-                setMovieQuery({ ...movieQuery, sortBy: sort })
-              }
-            />
-          </Box>
-        )}
+        <Box paddingLeft={2}>
+          <MovieHeading movieQuery={movieQuery} />
+          {!isSearching && (
+            <Box marginBottom={5}>
+              <SortBySelector
+                sortOrderBy={movieQuery.sortBy}
+                onSortBy={(sort) =>
+                  setMovieQuery({ ...movieQuery, sortBy: sort })
+                }
+              />
+            </Box>
+          )}
+        </Box>
 
         <MovieGrid movieQuery={movieQuery} />
       </GridItem>
