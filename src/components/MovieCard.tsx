@@ -19,11 +19,11 @@ function MovieCard({ movie }: Props) {
         objectFit="cover"
       />
       <CardBody>
-        <Heading fontSize={21} height="57px" marginBottom={3}>
+        <Heading fontSize={21} marginBottom={3}>
           {movie.title}
         </Heading>
         <Emoji rating={movie.vote_average} />
-        <Box display="flex" justifyContent="space-between" mt={7} paddingX={1}>
+        <Box display="flex" justifyContent="space-between" mt={5} paddingX={1}>
           <VoteCount vote={movie.vote_count} />
           <Rating rating={movie.vote_average} />
         </Box>
